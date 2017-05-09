@@ -11,15 +11,12 @@ import CoreLocation
 
 class ViewController: UIViewController {
 
-
-  var beacons = [CLBeaconRegion]()
   let locationManager = CLLocationManager()
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     setupLocation()
-    setupBeacons()
 
 
   }
@@ -28,15 +25,18 @@ class ViewController: UIViewController {
 
     self.locationManager.delegate = self
 
-    self.locationManager.requestWhenInUseAuthorization()
+    self.locationManager.requestAlwaysAuthorization()
   }
 
   func setupBeacons() {
-    let beaconPurple = CLBeaconRegion(
-      proximityUUID: NSUUID(uuidString: "27690087-FB67-F3FD-0B0D-1E66E30D636E")! as UUID, identifier: "Beacon: IntelLumen")
 
-    self.locationManager.startMonitoring(for: beaconPurple)
-    self.locationManager.requestState(for: beaconPurple)
+    let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, major: 37439, minor: 64691, identifier: "Identitat")
+
+    beacon.notifyEntryStateOnDisplay = true
+    beacon.notifyOnExit = true
+    beacon.notifyOnEntry = true
+    self.locationManager.startMonitoring(for: beacon)
+
   }
 
 }
@@ -52,11 +52,18 @@ extension ViewController: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     switch status {
 
+    case .authorizedAlways:
+
+      self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+      self.locationManager.startUpdatingLocation()
+
+      self.setupBeacons()
+
     case .authorizedWhenInUse:
 
       self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
       self.locationManager.startUpdatingLocation()
-      self.setupLocation()
+
       self.setupBeacons()
 
     case .denied:
@@ -68,13 +75,19 @@ extension ViewController: CLLocationManagerDelegate {
       removeRegions()
 
     default:
-      print("default case")
+      break
       
     }
   }
 
+  func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
+    self.locationManager.requestState(for: region)
+  }
+
   func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
-    print(beacons)
+    if beacons.count > 0 {
+      print(beacons)
+    }
   }
 
   func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
@@ -100,8 +113,8 @@ extension ViewController: CLLocationManagerDelegate {
     case .inside:
       
       let text = "inside range"
-      
       print("\(text): \(region.identifier)")
+
     case .outside:
       let text = "outside range"
       print("\(text): \(region.identifier)")
