@@ -30,11 +30,12 @@ class ViewController: UIViewController {
 
   func setupBeacons() {
 
-    let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, major: 37439, minor: 64691, identifier: "Identitat")
+    let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!, identifier: "Identitat")
 
     beacon.notifyEntryStateOnDisplay = true
     beacon.notifyOnExit = true
     beacon.notifyOnEntry = true
+    
     self.locationManager.startMonitoring(for: beacon)
 
   }
