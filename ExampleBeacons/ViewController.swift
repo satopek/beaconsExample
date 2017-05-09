@@ -11,6 +11,8 @@ import CoreLocation
 
 class ViewController: UIViewController {
 
+  @IBOutlet weak var labelBeacon: UILabel!
+
   let locationManager = CLLocationManager()
 
   override func viewDidLoad() {
@@ -113,12 +115,15 @@ extension ViewController: CLLocationManagerDelegate {
       
     case .inside:
       
-      let text = "inside range"
-      print("\(text): \(region.identifier)")
+      let text = "inside: \(region.identifier)"
+      print(text)
+      labelBeacon.text = text
 
     case .outside:
-      let text = "outside range"
-      print("\(text): \(region.identifier)")
+
+      let text = "outside: \(region.identifier)"
+      print(text)
+      labelBeacon.text = text
     }
   }
 }
