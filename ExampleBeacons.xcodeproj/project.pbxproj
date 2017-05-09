@@ -96,7 +96,7 @@
 				TargetAttributes = {
 					4E7730AE1EC2322C0072BDB1 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 266MTFXX5L;
+						DevelopmentTeam = PN57WAKKXJ;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -261,7 +261,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 266MTFXX5L;
+				DEVELOPMENT_TEAM = PN57WAKKXJ;
 				INFOPLIST_FILE = ExampleBeacons/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.identitat.ExampleBeacons;
@@ -274,7 +274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 266MTFXX5L;
+				DEVELOPMENT_TEAM = PN57WAKKXJ;
 				INFOPLIST_FILE = ExampleBeacons/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.identitat.ExampleBeacons;
